@@ -6,6 +6,8 @@ Programar e controlar um robô inteligente, em uma simulação de uma missão de
 Prosseguir por um caminho desconhecido, enfrentando vários obstáculos até chegar em segurança na base cientifica com as amostras coletadas utilizando código de programação.
 ### Solução :heavy_check_mark:
 Desenvolvimento de uma programação, eficaz e otimizada, dividida em tarefas para que fique organizada, com uma escrita clara e limpa, superandos os desafios enfrentados durante o percurso, para que chegue até a base científica com total segurança cumprindo todas as metas estipuladas; as coletas dos dados dos sensores durante o trajeto serão armazenadas, tratadas e com base nos resultados e cálculos o robô tomará decisões para prosseguir no trajeto até cumprir a missão.
+
+---
 # :computer: Código comentado 
 **Linguagem R-Educ**
 ```
@@ -246,6 +248,8 @@ Digital()
 }
 fim
 ```
+---
 ## Visual Studio e R-Educ
 ![VisualStudio](img/Programando1.png)
+---
 ![Programando4](img/Programando4.png)
