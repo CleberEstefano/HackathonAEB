@@ -1,0 +1,233 @@
+numero x = 100
+#::::::Variaveis e constantes
+numero luz1 = 0
+numero luz2 = 0
+numero luz3 = 0
+numero luz4 = 0
+numero luz5 = 0
+numero luz6 = 0
+
+#:::Constante de calibracao
+numero ePreto = 30
+
+#:::Texto
+texto A1 = ""
+texto A2 = ""
+texto A3 = ""
+
+#:::Tarefas
+
+#:::Leitura dos sensores
+tarefa lerLuz
+{
+    luz1 = luz(1)
+    luz2 = luz(2)
+    luz3 = luz(3)
+    luz4 = luz(4)
+    luz5 = luz(5)
+    luz6 = luz(6)
+}
+
+#:::Formatacao
+tarefa formatar
+{
+  A1 = concatenar(virartexto(luz1), virartexto(luz2))
+  A2 = concatenar(virartexto(luz3), virartexto(luz4))
+  A3 = virartexto(luz5)
+  escrever(1, concatenar3(A1, A2, A3))
+}
+#:::Converter para binario
+tarefa Digital
+{
+    se ((luz5 < ePreto) e (luz4 < ePreto) ) entao {
+  frente(200)
+ esperar(30)
+ se ((luz5 < ePreto) e (luz4 < ePreto)) entao {
+ acenderled("VERMELHO") 
+     escrever(3, "90 graus para esquerda! ")
+    direita(300)
+ esquerda(negativo(300))
+esperar(1000)
+  frente(200) 
+     esperar(220)
+     esquerda(300)
+esperar(1200)
+     farei {esquerda(300) direita(negativo(300))}enquanto(luz(3) >= ePreto)
+limparconsole()
+esquerda(300)
+     tras(70)
+    esperar(200)
+   }
+}  senao {
+}
+#::::
+       se ((luz1 < ePreto) e (luz2 < ePreto)) entao
+    {
+ frente(200)
+esperar(30)
+  se ((luz1 < ePreto) e (luz2 < ePreto)) entao{
+ acenderled("VERMELHO") 
+     escrever(3, "90 graus para direita! ")
+     esquerda(300)
+    direita(negativo(300))
+esperar(1000)
+frente(200) 
+     esperar(220)
+direita(300)
+esperar(1200)
+     farei {direita(300) esquerda(negativo(300))}enquanto(luz(3) >= ePreto)
+limparconsole()
+esquerda(300)
+     tras(70)
+    esperar(200)
+   }
+}  senao{
+}
+ 
+#::::
+    se ( luz2 < ePreto ) entao
+    {
+      luz2 = 1
+      acenderled("PRETO")
+      direita(300)
+    esperar(100) 
+    } 
+      senao { 
+       luz2 = 0
+    }
+    se ( luz1 < ePreto ) entao
+    {
+      luz1 = 1
+     acenderled("PRETO")
+      direita(300)
+      esperar(200)
+    } 
+    senao {
+      luz1 = 0
+    }
+    se ( luz4 < ePreto ) entao
+    {
+      luz4 = 1
+        acenderled("PRETO")
+      esquerda(300)
+     esperar(200) 
+    } 
+     senao{
+       luz4 = 0
+    }
+    se ( luz5 < ePreto ) entao
+    {
+      luz5 = 1
+ acenderled("PRETO")
+       esquerda(300)
+       esperar(150)
+    } 
+    senao {
+      luz5 = 0
+    }
+   se (( luz4 < ePreto ) e (luz2 < ePreto))entao
+   {
+acenderled("BRANCO")
+  frente(x)
+     }
+    
+#:::::
+#########################Sensor de cor; VERDE Esquerda;#########################
+    se((cor(2) == "VERDE") e (luz3 < ePreto))
+    entao {
+    acenderled("VERDE") 
+    frente(200) 
+    esperar(200)
+    direita(300)
+esperar(1000)
+    farei {direita(300)}enquanto(luz(3) >= ePreto) 
+   limparconsole()
+     tras(100)
+    esperar(100)
+   }
+
+##########################Sensor de cor; VERDE DIREITA;#########################
+   se((cor(4) == "VERDE") e (luz3 < ePreto)) 
+   entao {
+   acenderled("VERDE") 
+   frente(200) 
+   esperar(200)
+  esquerda(300)
+esperar(1000)
+   farei {esquerda(300)}enquanto(luz(3) >= ePreto) 
+ limparconsole()
+     tras(100)
+    esperar(100) 
+   }
+#############################SENSOR ULTRA#######################################################
+  se ((ultra(2) <= 13)) entao{
+se ((ultra(1) <= 15)) entao{
+acenderled("AZUL")
+#tras(200)
+#esperar(100)
+#
+direita(300)
+esperar(1500)
+frente(200)
+esperar(600)
+esquerda(300)
+esperar(1600)
+frente(200)
+esperar(600)
+#
+enquanto(luz(3) >= ePreto) farei{
+se((ultra(4) <= 70)) entao{
+frente(100)
+esperar(0)
+}
+se((ultra(4) > 70)) entao{
+esquerda(300)
+esperar(1400)
+}
+ se((luz(5) <= ePreto)) entao {
+frente(200)
+esperar(500) 
+direita(300)
+esperar(500)
+enquanto((luz(3) >= ePreto)) farei {direita(300)}
+se((luz(3) < ePreto)) entao { 
+tras(70)
+esperar(400)
+}
+interromper()
+
+}
+}
+}
+}
+senao{
+}
+se((ultra(3) <= 70) e (ultra(4) <= 70)) entao{
+acenderled("VERMELHO")
+repita 1 vezes {
+velocidadeatuador(32)
+baixar(100)
+se ((luz(3) <= ePreto)) entao {
+ frente(200)
+esperar(300)
+apagarled()
+}
+}
+}
+    #:::Formatar a saida
+    formatar()
+}
+inicio 
+velocidadeatuador(150)
+levantar(800)
+enquanto (verdadeiro) farei
+{
+ #Chama a funcao de leitura
+  lerLuz()
+  #Somente vai para frente
+  #Encontre uma velocidade adequada
+  
+  #Chama a funcao de conversao
+  Digital()
+}
+fim
